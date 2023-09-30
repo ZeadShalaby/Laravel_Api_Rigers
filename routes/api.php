@@ -1,8 +1,8 @@
 <?php
 
-    use App\Http\Controllers\ApiController;
-    use App\Http\Controllers\MobileController;
-    use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\MobileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,28 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 Route::any('/error_auth', [ApiController::class, 'errorAuth']);
 
-Route::group(
-    [
-        'middleware' => [
-            'auth_headers',
-            'logging_requests',
-        ]
-    ],
-    function () {
+Route::group(['middleware' => []],function () {
         Route::post('/register',            [ApiController::class, 'register']);
         Route::post('/auth',                [ApiController::class, 'auth']);
         Route::post('/registerToDoctor',    [ApiController::class, 'registerToDoctor']);
         Route::post('/getRegisterToDoctor', [ApiController::class, 'getRegisterToDoctor']);
     });
 
-Route::group(
-    [
-        'middleware' => [
-            'jwt.verify',
-            'logging_requests',
-        ]
-    ],
-    function () {
+Route::group(['middleware' => []],function () {
         Route::get('/getMessagesFrom',     [ApiController::class, 'getMessagesFrom']);
         Route::get('/getUsersByParams',    [ApiController::class, 'getUsersByParams']);
         Route::get('/getUserById',         [ApiController::class, 'getUserById']);
